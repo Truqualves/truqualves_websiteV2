@@ -1,0 +1,208 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Navy-based palette for trust & authority */
+    --background: 210 20% 98%;
+    --foreground: 213 39% 11%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 213 39% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 213 39% 11%;
+
+    /* Amber as primary — warm, confident */
+    --primary: 37 91% 53%;
+    --primary-foreground: 213 39% 11%;
+
+    --secondary: 210 20% 95%;
+    --secondary-foreground: 213 39% 11%;
+
+    --muted: 210 15% 93%;
+    --muted-foreground: 215 16% 47%;
+
+    /* Green accent — trust, success */
+    --accent: 103 62% 59%;
+    --accent-foreground: 213 39% 11%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 20% 89%;
+    --input: 214 20% 89%;
+    --ring: 37 91% 53%;
+
+    --radius: 0.625rem;
+
+    /* Custom brand tokens */
+    --navy: 213 39% 11%;
+    --navy-mid: 213 35% 18%;
+    --navy-light: 213 30% 25%;
+    --amber: 37 91% 53%;
+    --amber-hover: 37 91% 45%;
+    --green: 103 62% 59%;
+    --green-muted: 103 40% 92%;
+    --slate-text: 215 16% 47%;
+    --slate-light: 213 20% 58%;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+    overflow-wrap: break-word;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(var(--amber)), hsl(var(--green)));
+  }
+
+  .bg-navy {
+    background-color: hsl(var(--navy));
+  }
+
+  .bg-navy-mid {
+    background-color: hsl(var(--navy-mid));
+  }
+
+  .text-navy {
+    color: hsl(var(--navy));
+  }
+
+  .text-amber {
+    color: hsl(var(--amber));
+  }
+
+  .text-green {
+    color: hsl(var(--green));
+  }
+
+  .text-slate-text {
+    color: hsl(var(--slate-text));
+  }
+
+  .text-slate-light {
+    color: hsl(var(--slate-light));
+  }
+
+  .border-amber {
+    border-color: hsl(var(--amber));
+  }
+
+  .bg-green-muted {
+    background-color: hsl(var(--green-muted));
+  }
+
+  .gradient-bar {
+    background: linear-gradient(90deg, hsl(var(--green)), hsl(var(--amber)));
+  }
+
+  .hero-gradient {
+    background: linear-gradient(135deg, hsl(var(--navy)) 0%, hsl(var(--navy-mid)) 50%, hsl(213 32% 15%) 100%);
+  }
+
+  .section-padding {
+    @apply px-6 py-20 md:px-8 lg:py-28;
+  }
+
+  .container-narrow {
+    @apply max-w-6xl mx-auto;
+  }
+}
+
+/* Scroll reveal animation classes */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  filter: blur(4px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-20px);
+  filter: blur(4px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-left.revealed {
+  opacity: 1;
+  transform: translateX(0);
+  filter: blur(0);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(20px);
+  filter: blur(4px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-right.revealed {
+  opacity: 1;
+  transform: translateX(0);
+  filter: blur(0);
+}
+
+/* Stagger children */
+.stagger-children > .reveal:nth-child(1) { transition-delay: 0ms; }
+.stagger-children > .reveal:nth-child(2) { transition-delay: 80ms; }
+.stagger-children > .reveal:nth-child(3) { transition-delay: 160ms; }
+.stagger-children > .reveal:nth-child(4) { transition-delay: 240ms; }
+.stagger-children > .reveal:nth-child(5) { transition-delay: 300ms; }
+.stagger-children > .reveal:nth-child(6) { transition-delay: 360ms; }
+.stagger-children > .reveal:nth-child(7) { transition-delay: 400ms; }
+.stagger-children > .reveal:nth-child(8) { transition-delay: 440ms; }
+.stagger-children > .reveal:nth-child(9) { transition-delay: 480ms; }
+
+/* Pulse dot */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.animate-pulse-dot {
+  animation: pulse-dot 2s infinite;
+}

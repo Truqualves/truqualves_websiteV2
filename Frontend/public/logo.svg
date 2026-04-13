@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+  <rect width="48" height="48" rx="12" fill="url(#tq-grad)"/>
+  <path d="M14 24l6 6 14-14" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <defs>
+    <linearGradient id="tq-grad" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#e8a317"/>
+      <stop offset="1" stop-color="#c9890e"/>
+    </linearGradient>
+  </defs>
+</svg>
