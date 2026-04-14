@@ -13,6 +13,7 @@ import {
   Plus,
   ArrowUpRight,
   ArrowDownRight,
+  ArrowLeft,
   Settings,
   HelpCircle,
   LogOut,
@@ -22,7 +23,7 @@ import {
   MessageSquare,
   Wrench,
   Briefcase,
-  Mail
+  Mail,
 } from 'lucide-react';
 import type { KPI, Activity as ActivityItem, BlogPost } from './types';
 
@@ -120,6 +121,7 @@ export const ICONS = {
   Plus,
   ArrowUpRight,
   ArrowDownRight,
+  ArrowLeft,
   Settings,
   HelpCircle,
   LogOut,

@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ICONS } from '../constants';
 import type { ViewType } from '../types';
 import { useAuth } from '../../context';
@@ -12,6 +13,7 @@ interface SidebarProps {
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({ activeView, setActiveView, isOpen, setIsOpen }) => {
+  const navigate = useNavigate();
   const { userProfile, currentUser, logout } = useAuth();
 
   const resourceNavItems: { label: ViewType; icon: keyof typeof ICONS }[] = [
@@ -68,14 +70,14 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeView, setActiveView, isO
           if (window.innerWidth < 1024) setIsOpen(false);
         }}
         className={`w-full flex items-center p-3 rounded-xl transition-all group ${
-          isActive 
-            ? 'bg-teal-50 text-teal-600' 
+          isActive
+            ? 'bg-teal-50 text-teal-600'
             : 'text-slate-900 hover:bg-slate-50 hover:text-slate-950'
         }`}
       >
         <Icon size={20} className={`${isActive ? 'text-teal-600' : 'text-slate-700 group-hover:text-slate-900'}`} />
         {/* On mobile, we always want to show the text if the sidebar is open */}
-        <span className={`ml-3 font-medium text-sm transition-all duration-200 
+        <span className={`ml-3 font-medium text-sm transition-all duration-200
           ${isOpen ? 'opacity-100' : 'lg:opacity-0 lg:w-0 overflow-hidden'}`}>
           {item.label}
         </span>
@@ -85,6 +87,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeView, setActiveView, isO
       </button>
     );
   };
+
 
   return (
     <aside 
@@ -111,6 +114,21 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeView, setActiveView, isO
 
         {/* Navigation Items */}
         <div className="flex-1 overflow-y-auto py-6 px-3 no-scrollbar space-y-6">
+          <div>
+            <nav className="space-y-1">
+              <button
+                onClick={() => navigate('/')}
+                className="w-full flex items-center p-3 rounded-xl transition-all group text-slate-900 hover:bg-slate-50 hover:text-slate-950"
+              >
+                <ICONS.ArrowLeft size={20} className="text-slate-700 group-hover:text-slate-900" />
+                <span className={`ml-3 font-medium text-sm transition-all duration-200
+                  ${isOpen ? 'opacity-100' : 'lg:opacity-0 lg:w-0 overflow-hidden'}`}>
+                  Go to Home
+                </span>
+              </button>
+            </nav>
+          </div>
+
           <div>
             <p className={`px-3 mb-2 text-[10px] font-bold text-slate-400 uppercase tracking-widest transition-opacity
               ${isOpen ? 'opacity-100 text-slate-700' : 'lg:opacity-0 lg:w-0'}`}>General</p>
