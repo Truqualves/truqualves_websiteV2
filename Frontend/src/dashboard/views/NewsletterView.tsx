@@ -115,14 +115,14 @@ const NewsletterView: React.FC = () => {
 
   return (
     <div className="animate-in fade-in slide-in-from-bottom-4 duration-500 w-full max-w-none">
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-6">
+      {/* <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-6">
         <div>
           <h2 className="text-2xl font-bold text-slate-800">Newsletter Dashboard</h2>
           <p className="text-slate-500 text-sm font-medium">
             Send updates to all subscribed users or selected recipients.
           </p>
         </div>
-      </div>
+      </div> */}
 
       <div className="grid xl:grid-cols-[1.1fr_0.9fr] gap-6">
         <div className="bg-white rounded-2xl border border-slate-100 p-5 md:p-6">
