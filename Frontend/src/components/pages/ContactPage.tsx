@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import axios from "axios";
 import { ArrowRight, Clock, Mail, MapPin, Phone } from "lucide-react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import PageBanner from "@/components/layout/PageBanner";
@@ -20,13 +21,33 @@ export default function ContactPage() {
   ].filter((item) => item.text);
 
   const [formData, setFormData] = useState({
-    firstName: "", lastName: "", email: "", company: "", service: "", message: "",
+    firstName: "", lastName: "", email: "", company: "", phone: "", service: "", message: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success("Message sent! We'll get back to you within 24 hours.");
-    setFormData({ firstName: "", lastName: "", email: "", company: "", service: "", message: "" });
+    setIsSubmitting(true);
+
+    try {
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/contact`,
+        formData
+      );
+      toast.success(
+        data.message || "Message sent successfully! Our team will contact you within 24 hours."
+      );
+      setFormData({
+        firstName: "", lastName: "", email: "", company: "", phone: "", service: "", message: "",
+      });
+    } catch (error) {
+      const errorMessage = axios.isAxiosError(error)
+        ? error.response?.data?.message
+        : "Failed to send message. Please try again later.";
+      toast.error(errorMessage || "Failed to send message. Please try again later.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -91,7 +112,6 @@ export default function ContactPage() {
                       type="text"
                       value={formData.firstName}
                       onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                      placeholder="Rajesh"
                       className="w-full px-3 py-2.5 rounded-lg border border-border bg-card text-foreground text-sm focus:border-accent focus:outline-none transition-colors"
                       required
                     />
@@ -104,7 +124,6 @@ export default function ContactPage() {
                       type="text"
                       value={formData.lastName}
                       onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                      placeholder="Mehta"
                       className="w-full px-3 py-2.5 rounded-lg border border-border bg-card text-foreground text-sm focus:border-accent focus:outline-none transition-colors"
                       required
                     />
@@ -119,7 +138,6 @@ export default function ContactPage() {
                     type="email"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    placeholder="rajesh@company.com"
                     className="w-full px-3 py-2.5 rounded-lg border border-border bg-card text-foreground text-sm focus:border-accent focus:outline-none transition-colors"
                     required
                   />
@@ -133,7 +151,18 @@ export default function ContactPage() {
                     type="text"
                     value={formData.company}
                     onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                    placeholder="Your Company Name"
+                    className="w-full px-3 py-2.5 rounded-lg border border-border bg-card text-foreground text-sm focus:border-accent focus:outline-none transition-colors"
+                  />
+                </div>
+
+                <div className="mb-4">
+                  <label className="block font-heading font-bold text-xs uppercase tracking-wide mb-1.5">
+                    Phone
+                  </label>
+                  <input
+                    type="tel"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     className="w-full px-3 py-2.5 rounded-lg border border-border bg-card text-foreground text-sm focus:border-accent focus:outline-none transition-colors"
                   />
                 </div>
@@ -165,7 +194,6 @@ export default function ContactPage() {
                   <textarea
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    placeholder="Describe your validation requirements or questions..."
                     rows={4}
                     className="w-full px-3 py-2.5 rounded-lg border border-border bg-card text-foreground text-sm focus:border-accent focus:outline-none transition-colors resize-vertical"
                     required
@@ -174,10 +202,11 @@ export default function ContactPage() {
 
                 <button
                   type="submit"
-                  className="w-full py-3.5 rounded-lg bg-primary text-primary-foreground font-heading font-bold text-sm uppercase tracking-wide transition-all duration-200 hover:opacity-90 active:scale-[0.97] flex items-center justify-center gap-2"
+                  disabled={isSubmitting}
+                  className="w-full py-3.5 rounded-lg bg-primary text-primary-foreground font-heading font-bold text-sm uppercase tracking-wide transition-all duration-200 hover:opacity-90 active:scale-[0.97] flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Send Message & Request Consultation
-                  <ArrowRight size={16} />
+                  {isSubmitting ? "Sending..." : "Send Message & Request Consultation"}
+                  {!isSubmitting && <ArrowRight size={16} />}
                 </button>
               </form>
             </div>

@@ -14,7 +14,7 @@ const STATUS_META: Record<EventStatus, { label: string; tone: string }> = {
 };
 
 const STATUS_TABS: { key: EventStatus; label: string }[] = [
-  { key: 'new_request', label: 'Requests' },
+  { key: 'new_request', label: 'New Requests' },
   { key: 'active', label: 'Active' },
   { key: 'completed', label: 'Completed' },
   { key: 'cancelled', label: 'Cancelled / No Response' },
