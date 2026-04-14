@@ -64,6 +64,61 @@ export default function AboutPage() {
             </div>
           </div>
 
+          {/* How We Work Section */}
+          <div className="reveal">
+            <SectionLabel label="HOW WE WORK" />
+            <h2 className="font-heading font-extrabold text-2xl md:text-3xl text-foreground mb-2 leading-tight">
+              A Partnership, Not a Patchwork
+            </h2>
+            <div className="h-[3px] w-14 gradient-bar rounded-full mt-4 mb-2" />
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-12 items-center mb-12">
+            <div className="reveal">
+              <div className="relative rounded-2xl overflow-hidden shadow-xl">
+                <img
+                  src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80"
+                  alt="Watch Our Story"
+                  className="w-full h-auto max-h-[400px] object-cover"
+                />
+                <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                  <div className="text-center">
+                    <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center mx-auto mb-4">
+                      <svg className="w-8 h-8 text-white fill-current" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z"/>
+                      </svg>
+                    </div>
+                    <span className="text-white font-heading font-semibold text-sm uppercase tracking-wider">Watch Our Story</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="reveal space-y-8">
+              <h3 className="font-heading font-extrabold text-2xl md:text-3xl text-foreground leading-tight">
+                Your Trusted Partner in GxP Compliance
+              </h3>
+              <p className="text-muted-foreground leading-relaxed">
+                We work alongside your team as embedded specialists, delivering audit-ready packages and milestone-driven results that align with your regulatory timelines.
+              </p>
+              <div className="space-y-6">
+                {howWePartner.map((item, index) => (
+                  <div key={item.title} className="flex gap-4">
+                    <div className="flex-shrink-0">
+                      <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center">
+                        <item.icon size={24} className="text-accent" />
+                      </div>
+                    </div>
+                    <div>
+                      <h4 className="font-heading font-bold text-base text-foreground mb-2">{item.title}</h4>
+                      <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
           {/* Values */}
           <div className="reveal mb-6">
             <SectionLabel label="Our Values" />
@@ -157,32 +212,6 @@ export default function AboutPage() {
                 />
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* How We Work Section */}
-      <section className="px-6 pt-12 pb-16 md:px-8 md:pt-14 lg:pt-14 lg:pb-20 bg-background">
-        <div className="container-narrow">
-          <div className="reveal mb-8">
-            <SectionLabel label="HOW WE WORK" />
-            <h2 className="font-heading font-extrabold text-2xl md:text-3xl text-foreground mb-2 leading-tight">
-              A Partnership, Not a Patchwork
-            </h2>
-            <div className="h-[3px] w-14 gradient-bar rounded-full mt-4" />
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-6 stagger-children">
-            {howWePartner.map((item) => (
-              <div
-                key={item.title}
-                className="reveal bg-card border border-border rounded-xl p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/5 hover:border-amber"
-              >
-                <item.icon size={32} className="text-accent mb-4" />
-                <h3 className="font-heading font-bold text-base text-foreground mb-3">{item.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
-              </div>
-            ))}
           </div>
         </div>
       </section>
