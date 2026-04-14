@@ -20,12 +20,24 @@ export const missionVision = [
   {
     icon: Target,
     title: "Mission",
-    desc: "Deliver validation and compliance programs that regulators respect, auditors accept, and your operations can sustain ” without slowing innovation.",
+    desc: "Deliver validation and compliance programs that regulators respect, auditors accept, and your operations can sustain — without slowing innovation.",
+    keyPoints: [
+      "Regulator-respected validation programs",
+      "Audit-ready compliance documentation",
+      "Sustainable operational processes",
+      "Innovation-friendly approach"
+    ],
   },
   {
     icon: Eye,
     title: "Vision",
     desc: "Become the trusted validation partner for regulated manufacturers worldwide: predictable quality, transparent evidence, and long-term GxP maturity.",
+    keyPoints: [
+      "Global trusted partnership",
+      "Predictable quality outcomes",
+      "Transparent evidence management",
+      "Long-term GxP maturity"
+    ],
   },
 ];
 
