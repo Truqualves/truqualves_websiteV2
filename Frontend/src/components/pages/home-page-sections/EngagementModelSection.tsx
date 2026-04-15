@@ -39,6 +39,7 @@ export default function EngagementModelSection() {
                   src={item.image}
                   alt={item.title}
                   className="max-w-[80%] max-h-full object-contain"
+                  loading="lazy"
                 />
               </div>
             </div>

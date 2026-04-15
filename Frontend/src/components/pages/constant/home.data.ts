@@ -3,9 +3,9 @@
   FileCheck2,
   Layers3,
 } from "lucide-react";
-import AssessMapImg from "@/assets/Assess_map.png";
-import DocumentExecuteImg from "@/assets/Document_execute.png";
-import SustainImproveImg from "@/assets/Sustain_improve.png";
+import AssessMapImg from "@/assets/Assess_map.webp";
+import DocumentExecuteImg from "@/assets/Document_execute.webp";
+import SustainImproveImg from "@/assets/Sustain_improve.webp";
 
 export const stats = [
   { value: "10+", label: "Projects Delivered" },
