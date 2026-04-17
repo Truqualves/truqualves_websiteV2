@@ -61,8 +61,8 @@ export default function Hero() {
               animate="visible"
             >
               <motion.div custom={0} variants={fadeUp}>
-                <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary">
-                  <span className="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse-dot" />
+                <span className="inline-flex items-center gap-2 rounded-full border border-black bg-white px-4 py-1.5 text-sm font-medium text-black">
+                  <span className="w-2.5 h-2.5 rounded-full bg-gradient-to-r from-green-500 to-yellow-300 animate-pulse-dot" />
                   Expert Services
                 </span>
               </motion.div>
