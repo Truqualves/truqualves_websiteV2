@@ -84,7 +84,7 @@ export default function Navbar() {
             <li className="hidden xl:block ml-2">
               <Link
                 to="/dashboard"
-                className="font-heading text-xs font-bold uppercase tracking-wide px-4 xl:px-5 py-2.5 rounded-full bg-white text-black border-2 border-[#f59e0b] no-underline whitespace-nowrap transition-all duration-200 hover:opacity-90 active:scale-[0.97]"
+                className="glow-hover-25 font-heading text-xs font-bold uppercase tracking-wide px-4 xl:px-5 py-2.5 rounded-full bg-white text-black border border-black no-underline whitespace-nowrap transition-all duration-200 hover:opacity-90 active:scale-[0.97]"
               >
                 Access Dashboard
               </Link>
@@ -125,7 +125,7 @@ export default function Navbar() {
           {currentUser && (
             <Link
               to="/dashboard"
-              className="block mt-3 text-center font-heading text-sm font-bold uppercase tracking-wide px-5 py-3 rounded bg-white text-black border-2 border-[#f59e0b] no-underline"
+              className="glow-hover-25 block mt-3 text-center font-heading text-sm font-bold uppercase tracking-wide px-5 py-3 rounded bg-white text-black border border-black no-underline"
             >
               Access Dashboard
             </Link>
