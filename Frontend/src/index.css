@@ -138,6 +138,10 @@
   .container-narrow {
     @apply max-w-6xl mx-auto;
   }
+
+  .glow-hover:hover {
+    filter: drop-shadow(0 0 8px rgba(234, 179, 8, 0.8)) drop-shadow(0 0 16px rgba(34, 197, 94, 0.6));
+  }
 }
 
 /* Scroll reveal animation classes */

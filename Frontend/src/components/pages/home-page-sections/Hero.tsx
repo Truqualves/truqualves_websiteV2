@@ -98,7 +98,7 @@ export default function Hero() {
                 </Link>
                 <Link
                   to="/services"
-                  className="inline-flex items-center gap-2 rounded-lg border border-border bg-background/80 backdrop-blur px-6 py-3 text-sm font-semibold text-foreground hover:bg-muted transition-all"
+                  className="glow-hover inline-flex items-center gap-2 rounded-lg border border-black bg-white px-6 py-3 text-sm font-semibold text-black transition-all hover:-translate-y-0.5"
                 >
                   Our Services
                 </Link>
