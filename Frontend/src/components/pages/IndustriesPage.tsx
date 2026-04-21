@@ -44,7 +44,6 @@ const INDUSTRY_ICONS: Record<string, LucideIcon> = {
 
 export default function IndustriesPage() {
   const { data: industries = [], isLoading, isError } = useIndustriesQuery();
-  const cardShapeClass = "rounded-[3.5rem_1.2rem_3.5rem_1.2rem]";
   useScrollReveal([isLoading, industries.length]);
   useEffect(() => { window.scrollTo(0, 0); }, []);
 
@@ -89,7 +88,7 @@ export default function IndustriesPage() {
               return (
               <div
                 key={ind._id}
-                className={`reveal group relative bg-card border border-border p-6 min-h-[220px] transition-all duration-300 hover:shadow-xl hover:shadow-black/5 hover:-translate-y-1 hover:border-accent overflow-hidden ${cardShapeClass}`}
+                className="reveal group relative bg-card border border-border rounded-xl p-6 transition-all duration-300 hover:shadow-xl hover:shadow-black/5 hover:-translate-y-1 hover:border-accent overflow-hidden"
               >
                 <div className="absolute top-0 left-0 right-0 h-[3px] gradient-bar origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
                 <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-accent/15 to-primary/10 flex items-center justify-center mb-4">

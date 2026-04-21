@@ -11,7 +11,7 @@ interface ServicesSectionProps {
 
 export default function ServicesSection({ services, servicesLoading }: ServicesSectionProps) {
   const featuredServices = services.slice(0, 6);
-  const cardShapeClass = "rounded-[3.5rem_1.2rem_3.5rem_1.2rem]";
+  const cardShapeClass = "rounded-xl";
 
   return (
     <section className="section-padding bg-background">

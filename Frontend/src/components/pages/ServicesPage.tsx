@@ -51,14 +51,15 @@ export default function ServicesPage() {
           ) : null}
 
           {!isLoading && !isError && services.length > 0 ? (
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 stagger-children">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 stagger-children">
               {services.map((s) => {
                 const ServiceIcon = getServiceIcon(s.iconKey);
                 return (
                   <div
                     key={s.slug}
-                    className="reveal group glow-hover-50 relative bg-card border border-black rounded-lg p-6 transition-all duration-300 hover:-translate-y-1 overflow-hidden"
+                    className="reveal group relative bg-card border border-border rounded-xl p-6 transition-all duration-300 hover:shadow-xl hover:shadow-black/5 hover:-translate-y-1 hover:border-accent overflow-hidden"
                   >
+                    <div className="absolute top-0 left-0 right-0 h-[3px] gradient-bar origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
                     <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-accent/15 to-primary/10 flex items-center justify-center mb-4">
                       <ServiceIcon size={22} className="text-accent" />
                     </div>
