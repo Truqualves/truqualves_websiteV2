@@ -1,9 +1,22 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import SectionLabel from "@/components/layout/SectionLabel";
-import { truqualvesPillars } from "@/components/pages/constant/home.data";
+import { truqualvesPillars, whyTruqualLeftCardItems } from "@/components/pages/constant/home.data";
+
+const SLIDE_DURATION_MS = 4500;
 
 export default function WhyTruqualSection() {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      setActiveIndex((prev) => (prev + 1) % whyTruqualLeftCardItems.length);
+    }, SLIDE_DURATION_MS);
+
+    return () => window.clearTimeout(timer);
+  }, [activeIndex]);
+
   return (
     <section className="py-12 md:py-16 relative overflow-hidden bg-background">
       <div
@@ -15,34 +28,82 @@ export default function WhyTruqualSection() {
         }}
       />
 
-      <div className="container-narrow relative z-10">
-        <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-stretch">
-          <div className="reveal relative overflow-hidden rounded-[28px] border border-border/80 bg-white p-6 md:p-8 shadow-[0_24px_60px_rgba(15,23,42,0.08)]">
-            <div className="relative">
-              <SectionLabel label="Why TruQual" />
-              <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-extrabold leading-tight text-foreground max-w-xl mb-4">
-                Built for regulated teams that need speed, proof, and zero ambiguity.
-              </h2>
-              <p className="max-w-2xl text-sm sm:text-base text-muted-foreground leading-relaxed mb-8">
-                TruQualVES combines validation depth, audit-ready documentation, and practical execution support so your teams can move from qualification to inspection with confidence.
-              </p>
+      <div className="mx-auto max-w-[88rem] relative z-10">
+        <div className="reveal text-center max-w-2xl mx-auto mb-12">
+          <SectionLabel label="Why TruQual" />
+          <h2 className="font-heading font-extrabold text-2xl md:text-3xl text-foreground mb-3 leading-tight">
+            Built for regulated teams that need speed, proof, and zero ambiguity.
+          </h2>
+          <p className="text-muted-foreground leading-relaxed">
+            TruQualves combines validation depth, audit-ready documentation, and practical execution support so your teams can move from qualification to inspection with confidence.
+          </p>
+          <div className="h-[3px] w-14 gradient-bar rounded-full mt-5 mx-auto" />
+        </div>
 
-              <div className="grid gap-4 sm:grid-cols-3">
-                {[
-                  ["Risk-first planning", "Site-specific validation logic from day one"],
-                  ["Cross-functional delivery", "Quality, engineering, and operations in sync"],
-                  ["Inspection-ready output", "Evidence packages structured for review"],
-                ].map(([title, desc]) => (
-                  <div
-                    key={title}
-                    className="rounded-2xl border border-border/70 bg-secondary/40 px-4 py-5 backdrop-blur-sm"
-                  >
-                    <div className="font-heading text-xs font-bold uppercase tracking-[0.18em] text-amber mb-2">
-                      {title}
-                    </div>
-                    <p className="text-sm leading-relaxed text-muted-foreground">{desc}</p>
+        <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-stretch">
+          <div className="reveal relative overflow-hidden rounded-[28px] border border-border/80 bg-white p-4 md:p-5 shadow-[0_24px_60px_rgba(15,23,42,0.08)]">
+            <div className="relative">
+              <div className="overflow-hidden rounded-[22px] border border-border/70 bg-card">
+                <div className="p-4 md:p-5 bg-secondary/20">
+                  <div className="grid gap-4 sm:grid-cols-3">
+                    {whyTruqualLeftCardItems.map((item, index) => {
+                      const isActive = index === activeIndex;
+                      const Icon = item.icon;
+
+                      return (
+                        <button
+                          type="button"
+                          key={item.title}
+                          onClick={() => setActiveIndex(index)}
+                          className={`relative rounded-xl border px-3 py-4 text-left transition-all duration-300 ${
+                            isActive
+                              ? "border-accent/40 bg-card shadow-sm"
+                              : "border-border/70 bg-card/70 hover:border-accent/30"
+                          }`}
+                        >
+                          <div className="absolute left-0 top-0 h-[3px] w-full bg-border/80" />
+                          <div
+                            className="absolute left-0 top-0 h-[3px] gradient-bar"
+                            style={{
+                              width: isActive ? "100%" : "0%",
+                              transition: isActive
+                                ? `width ${SLIDE_DURATION_MS}ms linear`
+                                : "none",
+                            }}
+                          />
+                          <div
+                            className={`mb-3 flex items-center gap-2 font-heading text-lg font-bold leading-tight ${
+                              isActive ? "text-foreground" : "text-muted-foreground"
+                            }`}
+                          >
+                            <Icon
+                              size={18}
+                              className={isActive ? "text-accent" : "text-muted-foreground"}
+                            />
+                            <span>{item.title}</span>
+                          </div>
+                          <p
+                            className={`text-sm leading-relaxed ${
+                              isActive ? "text-foreground/80" : "text-muted-foreground"
+                            }`}
+                          >
+                            {item.desc}
+                          </p>
+                        </button>
+                      );
+                    })}
                   </div>
-                ))}
+                </div>
+
+                <div className="relative h-64 overflow-hidden bg-secondary/20 sm:h-72 lg:h-80">
+                  <img
+                    src={whyTruqualLeftCardItems[activeIndex].image}
+                    alt={whyTruqualLeftCardItems[activeIndex].title}
+                    className="h-full w-full object-contain object-center"
+                    loading="lazy"
+                  />
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/15 to-transparent" />
+                </div>
               </div>
 
               <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:items-center sm:justify-center">

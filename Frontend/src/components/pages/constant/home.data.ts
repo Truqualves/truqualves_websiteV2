@@ -1,11 +1,17 @@
-﻿import {
+import {
   Radar,
   FileCheck2,
   Layers3,
+  SlidersHorizontal,
+  Handshake,
+  ShieldCheck,
 } from "lucide-react";
 import AssessMapImg from "@/assets/Assess_map.webp";
 import DocumentExecuteImg from "@/assets/Document_execute.webp";
 import SustainImproveImg from "@/assets/Sustain_improve.webp";
+import CrossFunctionalImg from "@/assets/Cross-functional.png";
+import InspectionReadyImg from "@/assets/Inspection-ready.png";
+import RiskFirstImg from "@/assets/risk_first.png";
 
 export const stats = [
   { value: "10+", label: "Projects Delivered" },
@@ -53,6 +59,27 @@ export const truqualvesPillars = [
   },
 ];
 
+export const whyTruqualLeftCardItems = [
+  {
+    title: "Risk-first planning",
+    desc: "Site-specific validation logic from day one",
+    image: RiskFirstImg,
+    icon: SlidersHorizontal,
+  },
+  {
+    title: "Cross-functional delivery",
+    desc: "Quality, engineering, and operations in sync",
+    image: CrossFunctionalImg,
+    icon: Handshake,
+  },
+  {
+    title: "Inspection-ready output",
+    desc: "Evidence packages structured for review",
+    image: InspectionReadyImg,
+    icon: ShieldCheck,
+  },
+];
+
 export const deliverables = [
   "Validation master plans aligned to your site and product risk profile",
   "IQ/OQ/PQ, CSV, and method validation protocols with traceable evidence",
@@ -96,4 +123,3 @@ export const clientTrustSignals = [
   "Response within 1 business day",
   "NDA available on request",
 ];
-
