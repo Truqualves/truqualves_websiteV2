@@ -38,10 +38,13 @@ const DashboardView: React.FC = () => {
           </button>
         </div>
       </div>
+      
 
       <KPISection kpis={kpis} />
-      <ChartsSection />
+
       <ActivityTable events={events} loading={loading} error={error} />
+      <ChartsSection />
+      
       
       {/* Bottom spacer */}
       <div className="h-10"></div>
