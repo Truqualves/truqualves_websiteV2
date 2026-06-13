@@ -17,10 +17,11 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeView, setActiveView, isO
   const { userProfile, currentUser, logout } = useAuth();
 
   const resourceNavItems: { label: ViewType; icon: keyof typeof ICONS }[] = [
-    { label: 'Blogs', icon: 'BookOpen' },
-    { label: 'Contact', icon: 'MessageSquare' },
+    { label: 'About Page', icon: 'BookOpen' },
     { label: 'Industries', icon: 'FileText' },
     { label: 'Case Studies', icon: 'FileText' },
+    { label: 'Blogs', icon: 'BookOpen' },
+    { label: 'Contact', icon: 'MessageSquare' },
     { label: 'Team', icon: 'Users' },
   ];
 

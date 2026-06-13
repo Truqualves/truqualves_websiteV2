@@ -26,7 +26,45 @@ export interface BlogPost {
   image: string;
 }
 
-export type ViewType = 'Dashboard' | 'Blogs' | 'Services' | 'Case Studies' | 'Team' | 'Contact' | 'Industries' | 'Job Openings' | 'Candidate Info' | 'Users' | 'Events' | 'Newsletter' | 'Settings' | 'Support';
+export type ViewType = 'Dashboard' | 'Blogs' | 'Services' | 'Case Studies' | 'Team' | 'About Page' | 'Contact' | 'Industries' | 'Job Openings' | 'Candidate Info' | 'Users' | 'Events' | 'Newsletter' | 'Settings' | 'Support';
+
+export interface BackendAboutPage {
+  _id?: string;
+  story?: {
+    title: string;
+    content: string[];
+    sinceYear: number;
+    image?: string;
+  };
+  howWeWork?: {
+    title: string;
+    subtitle: string;
+    desc: string;
+    videoLink: string;
+    videoThumbnail?: string;
+    items: { icon: string; title: string; desc: string }[];
+  };
+  values?: { icon: string; title: string; desc: string }[];
+  mission?: {
+    title: string;
+    desc: string;
+    keyPoints: string[];
+    image?: string;
+  };
+  vision?: {
+    title: string;
+    desc: string;
+    keyPoints: string[];
+    image?: string;
+  };
+  standards?: {
+    title: string;
+    subtitle: string;
+    desc: string;
+    items: string[];
+  };
+  milestones?: { year: string; label: string; text: string }[];
+}
 
 export interface User {
   _id: string;

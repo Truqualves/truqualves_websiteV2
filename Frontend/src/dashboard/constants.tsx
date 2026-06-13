@@ -24,6 +24,13 @@ import {
   Wrench,
   Briefcase,
   Mail,
+  Target,
+  Eye,
+  FileCheck,
+  CalendarClock,
+  Lightbulb,
+  Scale,
+  ShieldCheck,
 } from 'lucide-react';
 import type { KPI, Activity as ActivityItem, BlogPost } from './types';
 
@@ -131,5 +138,12 @@ export const ICONS = {
   MessageSquare,
   Wrench,
   Briefcase,
-  Mail
+  Mail,
+  Target,
+  Eye,
+  FileCheck,
+  CalendarClock,
+  Lightbulb,
+  Scale,
+  ShieldCheck
 };

@@ -13,6 +13,7 @@ import jobOpeningRoutes from "./routes/jobOpeningRoutes.js";
 import jobCandidateRoutes from "./routes/jobCandidateRoutes.js";
 import newsletterRoutes from "./routes/newsletterRoutes.js";
 import industryRoutes from "./routes/industryRoutes.js";
+import aboutPageRoutes from "./routes/aboutPageRoutes.js";
 import connectDB from "./services/mongodbService.js";
 import corsMiddleware from "./middleware/corsMiddleware.js";
 
@@ -45,6 +46,7 @@ app.use("/api/job-openings", jobOpeningRoutes);
 app.use("/api/job-candidates", jobCandidateRoutes);
 app.use("/api/newsletter", newsletterRoutes);
 app.use("/api/industries", industryRoutes);
+app.use("/api/about-page", aboutPageRoutes);
 
 // Start server
 app.listen(port, () => {
