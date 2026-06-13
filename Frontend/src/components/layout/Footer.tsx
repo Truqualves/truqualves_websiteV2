@@ -1,30 +1,42 @@
 import { motion } from 'framer-motion';
-import { Facebook, Github, Gitlab, Instagram, Figma, Send, ChevronUp } from 'lucide-react';
+import { 
+  Facebook, 
+  Instagram, 
+  Send, 
+  ChevronUp, 
+  Mail, 
+  Phone, 
+  MapPin, 
+  Linkedin,
+  Twitter,
+  Github,
+  Gitlab
+} from 'lucide-react';
 import { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'sonner';
 import { Link } from 'react-router-dom';
+import { useServicesQuery } from '@/hooks/useServicesQuery';
+import { useContactInfoQuery } from '@/hooks/useContactInfoQuery';
 
-const footerLinks = {
-  services: [
-    { label: 'Process Validation', path: '/services' },
-    { label: 'CSV', path: '/services' },
-    { label: 'Equipment Qualification', path: '/services' },
-    { label: 'Method Validation', path: '/services' },
-    { label: 'Regulatory Audits', path: '/services' },
-  ],
-  company: [
+export default function Footer() {
+  const [newsletterEmail, setNewsletterEmail] = useState('');
+  const [isSubscribing, setIsSubscribing] = useState(false);
+  
+  const { data: services = [] } = useServicesQuery();
+  const { data: contactInfo } = useContactInfoQuery();
+
+  const footerServices = services
+    .filter(s => s.status === 'published')
+    .slice(0, 5);
+
+  const companyLinks = [
     { label: 'About Us', path: '/about' },
     { label: 'Case Studies', path: '/case-studies' },
     { label: 'Industries', path: '/industries' },
     { label: 'Contact', path: '/contact' },
     { label: 'Dashboard', path: '/dashboard' },
-  ],
-};
-
-export default function Footer() {
-  const [newsletterEmail, setNewsletterEmail] = useState('');
-  const [isSubscribing, setIsSubscribing] = useState(false);
+  ];
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -63,14 +75,13 @@ export default function Footer() {
     { icon: <Github size={20} />, href: "#", label: "GitHub" },
     { icon: <Send size={20} />, href: "#", label: "Telegram" },
     { icon: <Instagram size={20} />, href: "#", label: "Instagram" },
-    { icon: <Figma size={20} />, href: "#", label: "Figma" },
   ];
 
   return (
     <footer className="relative w-full bg-white pt-20 overflow-hidden">
       {/* Content Container */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 pb-24">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 text-left">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 text-left">
           {/* Brand Column */}
           <div className="flex flex-col gap-4">
             <div>
@@ -82,7 +93,37 @@ export default function Footer() {
             <p className="text-gray-600 leading-relaxed text-sm max-w-xs">
               Precision-driven validation and compliance solutions for life sciences and regulated industries worldwide.
             </p>
-            <div className="flex gap-4 mt-4">
+            
+            {/* Dynamic Contact Info */}
+            <div className="flex flex-col gap-2 mt-2">
+              {(() => {
+                const emailMatches = contactInfo?.email?.match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g) || [];
+                return emailMatches.map((email, idx) => (
+                  <a 
+                    key={idx}
+                    href={`mailto:${email}`} 
+                    className="flex items-center gap-2 text-xs text-gray-500 hover:text-orange-500 transition-colors"
+                  >
+                    <Mail size={14} className="text-orange-500" />
+                    {email}
+                  </a>
+                ));
+              })()}
+              {contactInfo?.phone && (
+                <a href={`tel:${contactInfo.phone}`} className="flex items-center gap-2 text-xs text-gray-500 hover:text-orange-500 transition-colors">
+                  <Phone size={14} className="text-orange-500" />
+                  {contactInfo.phone}
+                </a>
+              )}
+              {contactInfo?.officeAddress && (
+                <div className="flex items-start gap-2 text-xs text-gray-500">
+                  <MapPin size={14} className="text-orange-500 mt-0.5 shrink-0" />
+                  <span>{contactInfo.officeAddress}</span>
+                </div>
+              )}
+            </div>
+
+            <div className="flex gap-4 mt-2">
               {socialLinks.slice(0, 4).map((social, index) => (
                 <motion.a
                   key={index}
@@ -101,16 +142,25 @@ export default function Footer() {
           <div>
             <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-6">Services</h3>
             <ul className="space-y-4">
-              {footerLinks.services.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    to={link.path}
-                    className="text-gray-600 hover:text-orange-500 transition-colors text-sm"
-                  >
-                    {link.label}
+              {footerServices.length > 0 ? (
+                footerServices.map((s) => (
+                  <li key={s.slug}>
+                    <Link
+                      to={`/services/${s.slug}`}
+                      className="text-gray-600 hover:text-orange-500 transition-colors text-sm block truncate"
+                      title={s.title}
+                    >
+                      {s.title.length > 28 ? `${s.title.substring(0, 28)}...` : s.title}
+                    </Link>
+                  </li>
+                ))
+              ) : (
+                <li>
+                  <Link to="/services" className="text-gray-600 hover:text-orange-500 transition-colors text-sm">
+                    All Services
                   </Link>
                 </li>
-              ))}
+              )}
             </ul>
           </div>
 
@@ -118,7 +168,7 @@ export default function Footer() {
           <div>
             <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-6">Company</h3>
             <ul className="space-y-4">
-              {footerLinks.company.map((link) => (
+              {companyLinks.map((link) => (
                 <li key={link.label}>
                   <Link
                     to={link.path}
