@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function Hero() {
   return (
-    <main className="relative min-h-screen bg-[hsl(210,20%,98%)] overflow-hidden font-body">
+    <main className="relative bg-[hsl(210,20%,98%)] overflow-hidden font-body">
       {/* Ambient glows */}
       <div className="absolute -top-[180px] -left-[180px] w-[600px] h-[600px] rounded-full pointer-events-none z-0 bg-[radial-gradient(circle,hsla(37,91%,53%,0.14)_0%,transparent_70%)] blur-[60px]" />
       <div className="absolute -bottom-[120px] -right-[120px] w-[600px] h-[600px] rounded-full pointer-events-none z-0 bg-[radial-gradient(circle,hsla(103,62%,59%,0.12)_0%,transparent_70%)] blur-[60px]" />
@@ -41,7 +41,7 @@ export default function Hero() {
       </svg>
 
       {/* Hero */}
-      <section className="relative z-10 max-w-[1320px] mx-auto px-5 pt-28 pb-16 md:px-8 md:pt-36 md:pb-24 text-center flex flex-col items-center gap-6" id="top">
+      <section className="relative z-10 max-w-[1320px] mx-auto px-5 pt-28 pb-16 md:px-8 md:pt-32 md:pb-24 text-center flex flex-col items-center gap-6" id="top">
         <a
           className="inline-flex items-center gap-2 border border-[hsl(214,20%,89%)] bg-white rounded-full px-4 py-[0.4rem] text-[0.8125rem] font-medium text-[hsl(215,16%,47%)] no-underline transition-all duration-200 ease-out shadow-[0_1px_4px_hsla(213,39%,11%,0.06)] hover:border-[hsl(37,91%,53%)] hover:text-[hsl(213,39%,11%)] hover:shadow-[0_2px_8px_hsla(37,91%,53%,0.18)]"
           href="#process"
