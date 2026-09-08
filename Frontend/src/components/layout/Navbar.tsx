@@ -30,16 +30,34 @@ export default function Navbar() {
   }, [location.pathname]);
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "shadow-lg"
-          : ""
-      }`}
-      style={{ borderBottom: "3px solid #f59e0b", backgroundColor: "hsl(0 0% 100% / 0.98)", backdropFilter: "blur(12px)" }}
-    >
-      <div className="container-narrow flex items-center justify-between h-[70px] px-6">
-        <Link to="/" className="flex items-center gap-0 no-underline">
+    <>
+      {/* Top blur strip — blurs the gap above the floating navbar on scroll */}
+      <div
+        className={`fixed top-0 left-0 right-0 z-40 h-7 transition-all duration-500 ${
+          scrolled
+            ? "opacity-100 backdrop-blur-md"
+            : "opacity-0 pointer-events-none"
+        }`}
+        style={{
+          background: "linear-gradient(to bottom, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0) 100%)",
+          WebkitBackdropFilter: scrolled ? "blur(12px)" : "none",
+        }}
+      />
+
+      <nav
+        className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-6xl rounded-xl transition-all duration-300 ${
+          scrolled
+            ? "shadow-lg"
+            : "shadow-md"
+        }`}
+        style={{ borderBottom: "3px solid #c0c0c0", backgroundColor: "hsl(0 0% 100% / 0.98)", backdropFilter: "blur(12px)" }}
+      >
+      <div className="grid grid-cols-[1fr_auto_1fr] lg:flex lg:items-center lg:justify-between items-center h-[58px] px-6">
+        {/* Mobile: col-1 spacer | Desktop: hidden */}
+        <div className="lg:hidden" />
+
+        {/* Logo — centered on mobile, left on desktop */}
+        <Link to="/" className="flex items-center gap-0 no-underline justify-self-center lg:justify-self-auto">
           <img
             src="/logo.png"
             alt=""
@@ -56,50 +74,53 @@ export default function Navbar() {
           </div>
         </Link>
 
-        {/* Desktop links */}
-        <ul className="hidden lg:flex items-center gap-0.5 xl:gap-1 list-none flex-nowrap min-w-0">
-          {navLinks.map((link) => (
-            <li key={link.path}>
-              <Link
-                to={link.path}
-                className={`font-heading text-xs font-semibold tracking-wide uppercase px-2 xl:px-3 py-2 rounded transition-colors duration-200 no-underline whitespace-nowrap ${
-                  location.pathname === link.path
-                    ? "text-primary"
-                    : "text-slate-600 hover:text-primary hover:bg-slate-100"
-                }`}
-              >
-                {link.label}
-              </Link>
-            </li>
-          ))}
-          <li className="hidden xl:block ml-2">
-            <Link
-              to="/contact"
-              className="font-heading text-xs font-bold uppercase tracking-wide px-4 xl:px-5 py-2.5 rounded-full bg-primary text-primary-foreground no-underline whitespace-nowrap transition-all duration-200 hover:opacity-90 active:scale-[0.97]"
-            >
-              Contact
-            </Link>
-          </li>
-          {currentUser && (
+        {/* Desktop links + Mobile toggle — right-aligned in both layouts */}
+        <div className="flex items-center justify-end">
+          {/* Desktop links */}
+          <ul className="hidden lg:flex items-center gap-0.5 xl:gap-1 list-none flex-nowrap min-w-0">
+            {navLinks.map((link) => (
+              <li key={link.path}>
+                <Link
+                  to={link.path}
+                  className={`nav-link font-heading text-xs font-semibold tracking-wide uppercase px-2 xl:px-3 py-2 rounded transition-colors duration-200 no-underline whitespace-nowrap ${
+                    location.pathname === link.path
+                      ? "text-black active"
+                      : "text-slate-600 hover:text-black"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
             <li className="hidden xl:block ml-2">
               <Link
-                to="/dashboard"
-                className="glow-hover-25 font-heading text-xs font-bold uppercase tracking-wide px-4 xl:px-5 py-2.5 rounded-full bg-white text-black border border-black no-underline whitespace-nowrap transition-all duration-200 hover:opacity-90 active:scale-[0.97]"
+                to="/contact"
+                className="font-heading text-xs font-bold uppercase tracking-wide px-4 xl:px-5 py-2.5 rounded-full bg-primary text-primary-foreground no-underline whitespace-nowrap transition-all duration-200 hover:opacity-90 active:scale-[0.97]"
               >
-                Access Dashboard
+                Contact
               </Link>
             </li>
-          )}
-        </ul>
+            {currentUser && (
+              <li className="hidden xl:block ml-2">
+                <Link
+                  to="/dashboard"
+                  className="glow-hover-25 font-heading text-xs font-bold uppercase tracking-wide px-4 xl:px-5 py-2.5 rounded-full bg-white text-black border border-black no-underline whitespace-nowrap transition-all duration-200 hover:opacity-90 active:scale-[0.97]"
+                >
+                  Access Dashboard
+                </Link>
+              </li>
+            )}
+          </ul>
 
-        {/* Mobile toggle */}
-        <button
-          className="lg:hidden text-navy p-2"
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label="Toggle menu"
-        >
-          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+          {/* Mobile toggle */}
+          <button
+            className="lg:hidden text-navy p-2"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label="Toggle menu"
+          >
+            {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile menu */}
@@ -133,5 +154,7 @@ export default function Navbar() {
         </div>
       )}
     </nav>
+
+    </>
   );
 }
