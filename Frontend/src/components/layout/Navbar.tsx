@@ -106,7 +106,7 @@ export default function Navbar() {
                   to="/dashboard"
                   className="glow-hover-25 font-heading text-xs font-bold uppercase tracking-wide px-4 xl:px-5 py-2.5 rounded-full bg-white text-black border border-black no-underline whitespace-nowrap transition-all duration-200 hover:opacity-90 active:scale-[0.97]"
                 >
-                  Access Dashboard
+                  Dashboard
                 </Link>
               </li>
             )}
