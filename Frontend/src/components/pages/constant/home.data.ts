@@ -123,3 +123,17 @@ export const clientTrustSignals = [
   "Response within 1 business day",
   "NDA available on request",
 ];
+
+export interface HeroCard {
+  icon: string;
+  title: string;
+  desc: string;
+}
+
+export const heroCards: HeroCard[] = [
+  { icon: "🔬", title: "CSV Standards", desc: "21 CFR Part 11 ready" },
+  { icon: "🏭", title: "GMP Validated", desc: "EU & WHO standards" },
+  { icon: "📊", title: "Risk-Based", desc: "ICH Q9 methodology" },
+  { icon: "🎯", title: "First-Pass Success", desc: "98.3% audit pass rate" },
+];
+

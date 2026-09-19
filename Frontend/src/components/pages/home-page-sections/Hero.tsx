@@ -1,5 +1,16 @@
 import { ArrowRight, Sparkles, Stethoscope } from "lucide-react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { heroCards } from "@/components/pages/constant/home.data";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.1, duration: 0.45, ease: "easeOut" as const },
+  }),
+};
 
 export default function Hero() {
   return (
@@ -41,7 +52,7 @@ export default function Hero() {
       </svg>
 
       {/* Hero */}
-      <section className="relative z-10 max-w-[1320px] mx-auto px-5 pt-28 pb-16 md:px-8 md:pt-32 md:pb-24 text-center flex flex-col items-center gap-6" id="top">
+      <section className="relative z-10 max-w-[1320px] mx-auto px-5 pt-32 pb-16 sm:pt-36 md:px-8 md:pt-36 lg:pt-40 md:pb-24 text-center flex flex-col items-center gap-6" id="top">
         <a
           className="inline-flex items-center gap-2 border border-[hsl(214,20%,89%)] bg-white rounded-full px-4 py-[0.4rem] text-[0.8125rem] font-medium text-[hsl(215,16%,47%)] no-underline transition-all duration-200 ease-out shadow-[0_1px_4px_hsla(213,39%,11%,0.06)] hover:border-[hsl(37,91%,53%)] hover:text-[hsl(213,39%,11%)] hover:shadow-[0_2px_8px_hsla(37,91%,53%,0.18)]"
           href="#process"
@@ -95,6 +106,28 @@ export default function Hero() {
               <Stethoscope size={18} focusable={false} />
             </span> Clinical Operations
           </span>
+        </div>
+
+        {/* Feature cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 w-full max-w-5xl mt-6">
+          {heroCards.map((card, i) => (
+            <motion.div
+              key={card.title}
+              custom={i}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeUp}
+              className="group relative rounded-2xl border border-border/70 bg-card/80 backdrop-blur-md p-5 sm:p-6 text-left shadow-sm hover:shadow-xl hover:border-primary/40 hover:-translate-y-1 transition-all duration-300"
+            >
+              <span className="text-3xl block mb-3">{card.icon}</span>
+              <h3 className="font-heading font-semibold text-foreground text-base mb-1">
+                {card.title}
+              </h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">{card.desc}</p>
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+            </motion.div>
+          ))}
         </div>
       </section>
     </main>
